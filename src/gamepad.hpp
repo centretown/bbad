@@ -19,6 +19,7 @@ typedef struct Pad {
 const char *AxisName(int axis);
 Rectangle ButtonsToRectangle(Rectangle rec, Rectangle recbase, float scale);
 Vector3 AxesToVectorPro(Vector3 vec, float scale, Vector3 min, Vector3 max);
+Vector3 AxesToVector(Vector3 vec, float scale);
 Vector3 ButtonsToVector(Vector3 vec, Vector3 base, float scale);
 Rectangle ButtonsToRectangle(Rectangle rec, Rectangle recbase, float scale);
 Navigator InputGamepadNav(double now);
