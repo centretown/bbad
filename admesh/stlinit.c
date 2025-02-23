@@ -325,9 +325,9 @@ void stl_read(stl_file *stl, int first_facet, int first) {
       // (in this order, otherwise it won't work when they are paired in the
       // middle of a file)
       fscanf(stl->fp, "endsolid\n");
-      fscanf(stl->fp,
-             "solid%*[^\n]\n"); // name might contain spaces so %*s doesn't work
-                                // and it also can be empty (just "solid")
+      // name might contain spaces so %*s doesn't
+      // work and it also can be empty (just "solid")
+      fscanf(stl->fp, "solid%*[^\n]\n");
 
       if ((fscanf(stl->fp, " facet normal %f %f %f\n", &facet.normal.x,
                   &facet.normal.y, &facet.normal.z) +

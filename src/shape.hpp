@@ -3,10 +3,11 @@
 
 void Empty(void *);
 void EmptyMove(void *, Vector3);
-Vector3 EmptyPosition(void *);
+Vector3 EmptyVector3(void *);
 
 class Shape {
   void *p;
+  Vector3 (*size)(void *);
   void (*draw)(void *);
   void (*drawWires)(void *);
   void (*move)(void *, Vector3);
@@ -17,12 +18,14 @@ class Shape {
 public:
   Shape();
   Shape(void *p);
-  Shape(void *p, void(void *draw), void(void *drawWires),
+  Shape(void *p, Vector3(void *size), void(void *draw), void(void *drawWires),
         void (*move)(void *, Vector3), Vector3 (*position)(void *));
-  Shape(void *p, void(void *draw), void (*move)(void *, Vector3),
+  Shape(void *p, Vector3(void *size), void(void *draw),
+        void (*drawWires)(void *), void (*move)(void *, Vector3),
         Vector3 (*position)(void *), void (*load)(void *),
         void (*unload)(void *));
 
+  Vector3 Size() { return size(p); }
   void Draw() { draw(p); }
   void DrawWires() { drawWires(p); }
   void Move(Vector3 v) { move(p, v); }
@@ -42,35 +45,35 @@ template <typename T> Vector3 Position(void *p) {
 }
 
 struct Cube {
-  Vector3 position;
-  Vector3 size;
-  Color color;
+  Vector3 position = {0};
+  Vector3 size = {0};
+  Color color = {0};
   Shape Make();
 };
 
 struct Sphere {
-  Vector3 position;
-  float radius;
-  Color color;
+  Vector3 position = {0};
+  float radius = 0.0f;
+  Color color = {0};
   Shape Make();
 };
 
 struct Cylinder {
-  Vector3 position;
-  float radiusTop;
-  float radiusBottom;
-  float height;
-  int slices;
-  Color color;
+  Vector3 position = {0};
+  float radiusTop = 0.0f;
+  float radiusBottom = 0.0f;
+  float height = 0.0f;
+  int slices = 0;
+  Color color = {0};
   Shape Make();
 };
 
 struct Capsule {
-  Vector3 startPos;
-  Vector3 endPos;
-  float radius;
-  int slices;
-  int rings;
-  Color color;
+  Vector3 startPos = {0};
+  Vector3 endPos = {0};
+  float radius = 0.0f;
+  int slices = 0;
+  int rings = 0;
+  Color color = {0};
   Shape Make();
 };

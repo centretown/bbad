@@ -29,10 +29,11 @@
 PLATFORM              ?= PLATFORM_DESKTOP
 
 # Define project variables
-PROJECT_NAME          ?= stl
+PROJECT_NAME          ?= teststl
 PROJECT_VERSION       ?= 0.1.0
 PROJECT_BUILD_PATH    ?= .
-PROJECT_SOURCE_FILES  ?= stl.cpp \
+PROJECT_SOURCE_FILES  ?= teststl.cpp \
+	dump.cpp \
 	../src/gamepad.cpp \
 	../src/keyboard.cpp \
 	../src/mouse.cpp \
@@ -40,7 +41,9 @@ PROJECT_SOURCE_FILES  ?= stl.cpp \
 	../src/compass.cpp \
 	../src/circle.cpp \
 	../src/shape.cpp \
+	../src/stlshape.cpp \
 	../src/window.cpp \
+	../src/lighting.cpp \
 	../admesh/connect.c \
 	../admesh/normals.c \
 	../admesh/shared.c \
@@ -52,6 +55,7 @@ RAYLIB_SRC_PATH       ?= /home/dave/src/raylib/src
 RAYLIB_INCLUDE_PATH   ?= $(RAYLIB_SRC_PATH)
 RAYLIB_LIB_PATH       ?= $(RAYLIB_SRC_PATH)
 ADMESH_INCLUDE_PATH   ?=/home/dave/src/bbad/admesh
+RAYGUI_INCLUDE_PATH   ?=/home/dave/src/raygui/src
 
 # Library type used for raylib: STATIC (.a) or SHARED (.so/.dll)
 RAYLIB_LIBTYPE        ?= STATIC
@@ -194,7 +198,10 @@ endif
 
 # Define include paths for required headers: INCLUDE_PATHS
 #------------------------------------------------------------------------------------------------
-INCLUDE_PATHS += -I. -Iexternal -I$(RAYLIB_INCLUDE_PATH) -I$(ADMESH_INCLUDE_PATH)
+INCLUDE_PATHS += -I. -Iexternal \
+	-I$(RAYLIB_INCLUDE_PATH) \
+	-I$(ADMESH_INCLUDE_PATH) \
+	-I$(RAYGUI_INCLUDE_PATH)
 
 # Define additional directories containing required header files
 ifeq ($(PLATFORM),PLATFORM_DRM)
